@@ -197,4 +197,28 @@
         </dependency>
     </dependencies>
 
+    <properties>
+        <repo-release-url>http://192.168.88.226/artifactory/libs-releases-local</repo-release-url>
+        <repo-release-name>RetailNext Artifacts Internal Repository</repo-release-name>
+        <repo-release-id>internal-central</repo-release-id>
+
+        <repo-snapshot-url>http://192.168.88.226/artifactory/libs-snapshots-local</repo-snapshot-url>
+        <repo-snapshot-name>RetailNext Snapshot Artifacts Internal Repository</repo-snapshot-name>
+        <repo-snapshot-id>internal-snapshots</repo-snapshot-id>
+    </properties>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>${repo-snapshot-id}</id>
+            <name>${repo-snapshot-name}</name>
+            <url>${repo-snapshot-url}/</url>
+            <uniqueVersion>true</uniqueVersion>
+        </snapshotRepository>
+        <repository>
+            <id>${repo-release-id}</id>
+            <name>${repo-release-name}</name>
+            <url>${repo-release-url}/</url>
+        </repository>
+    </distributionManagement>
+
 </project>

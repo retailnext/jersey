@@ -43,12 +43,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>net.java</groupId>
-        <artifactId>jvnet-parent</artifactId>
-        <version>4</version>
-    </parent>
-
     <groupId>org.glassfish.jersey</groupId>
     <artifactId>project</artifactId>
     <packaging>pom</packaging>
@@ -688,9 +682,6 @@
         </profile>
         <profile>
             <id>release</id>
-            <modules>
-                <module>docs</module>
-            </modules>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -796,10 +787,17 @@
             </reporting>
             <!-- placeholder required for site:stage -->
             <distributionManagement>
-                <site>
-                    <id>localhost</id>
-                    <url>http://localhost</url>
-                </site>
+                <snapshotRepository>
+                    <id>${repo-snapshot-id}</id>
+                    <name>${repo-snapshot-name}</name>
+                    <url>${repo-snapshot-url}/</url>
+                    <uniqueVersion>true</uniqueVersion>
+                </snapshotRepository>
+                <repository>
+                    <id>${repo-release-id}</id>
+                    <name>${repo-release-name}</name>
+                    <url>${repo-release-url}/</url>
+                </repository>
             </distributionManagement>
         </profile>
     </profiles>
@@ -955,6 +953,23 @@
             <name>java.net Maven Release Repository</name>
             <url>https://maven.java.net/content/groups/public</url>
             <layout>default</layout>
+        </repository>
+        <repository>
+            <id>internal</id>
+            <name>Artifacts Managed Internal Repository</name>
+            <url>http://192.168.88.226/artifactory/libs-releases-local/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>internal-snapshot</id>
+            <name>Snapshot Artifacts Internal Repository</name>
+            <url>http://192.168.88.226/artifactory/libs-snapshots-local</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
         </repository>
     </repositories>
 
@@ -1431,5 +1446,13 @@
         <validation.api.version>1.1.0.Final</validation.api.version>
         <weld.version>2.0.0.Final</weld.version>
         <xerces.version>2.11.0</xerces.version>
+
+        <repo-release-url>http://192.168.88.226/artifactory/libs-releases-local</repo-release-url>
+        <repo-release-name>RetailNext Artifacts Internal Repository</repo-release-name>
+        <repo-release-id>internal-central</repo-release-id>
+
+        <repo-snapshot-url>http://192.168.88.226/artifactory/libs-snapshots-local</repo-snapshot-url>
+        <repo-snapshot-name>RetailNext Snapshot Artifacts Internal Repository</repo-snapshot-name>
+        <repo-snapshot-id>internal-snapshots</repo-snapshot-id>
     </properties>
 </project>

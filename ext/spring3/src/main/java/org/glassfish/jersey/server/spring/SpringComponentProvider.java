@@ -77,8 +77,13 @@ public class SpringComponentProvider implements ComponentProvider {
     private volatile ServiceLocator locator;
     private volatile ApplicationContext ctx;
 
+    private final ContextLoadWaiter waiter = new ContextLoadWaiter();
+
     @Override
     public void initialize(ServiceLocator locator) {
+
+        waiter.doWait(); // Wait till Spring is done
+
         this.locator = locator;
 
         if (LOGGER.isLoggable(Level.FINE)) {

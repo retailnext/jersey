@@ -930,6 +930,7 @@
         <module>core-common</module>
         <module>core-server</module>
         <module>core-client</module>
+        <module>test-framework</module>
 
         <module>ext</module>
         <module>media</module>
